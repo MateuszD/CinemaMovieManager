@@ -58,10 +58,6 @@ public class MovieDao {
                 transaction.rollback();
             }
         }
-        transaction = session.beginTransaction();
-        session.delete(session.get(Movie.class, id));
-        transaction.commit();
-
         session.close();
     }
 

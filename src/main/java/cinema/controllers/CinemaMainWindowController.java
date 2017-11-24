@@ -2,6 +2,7 @@ package cinema.controllers;
 
 import cinema.model.Movie;
 import cinema.presenter.CinemaProjectPresenter;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -13,16 +14,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
-
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
-import static java.awt.Color.RED;
 
 public class CinemaMainWindowController implements Initializable {
 
@@ -92,11 +89,13 @@ public class CinemaMainWindowController implements Initializable {
     }
 
     public void deleteMovieFromList(ActionEvent actionEvent) {
-        Integer selectedIndex = moviesTableView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            moviesTableView.getItems().remove(movie.getMovieId());
+        Integer selectedMovieIndex = moviesTableView.selectionModelProperty().getValue().getSelectedItem().getMovieId();
+        Movie movieToDelete = moviesTableView.selectionModelProperty().getValue().getSelectedItem();
+        if (selectedMovieIndex >= 0) {
+            Integer selectedIndexFromTable = moviesTableView.getSelectionModel().getSelectedIndex();
+            moviesTableView.getItems().remove(selectedIndexFromTable);
             observableListOfMovies.clear();
-            presenter.removeMovieFromDatabase(movie, selectedIndex);
+            presenter.removeMovieFromDatabase(movieToDelete, selectedMovieIndex);
 
             observableListOfMovies = FXCollections.observableArrayList(presenter.showMovieList());
             moviesTableView.getItems().clear();
