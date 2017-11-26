@@ -82,7 +82,7 @@ public class CinemaMainWindowController implements Initializable {
             moviesTableView.setItems(observableListOfMovies);
         } else {
             warningLabel.setTextFill(Color.RED);
-            warningLabel.setText("Wypełnij puste pola!!");
+            warningLabel.setText("Wypełnij puste pola!");
         }
     }
 
