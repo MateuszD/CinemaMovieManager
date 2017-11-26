@@ -3,6 +3,7 @@ package cinema.controllers;
 import cinema.model.Movie;
 import cinema.presenter.CinemaProjectPresenter;
 
+import hibernateUtil.HibernateUtil;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -101,5 +102,10 @@ public class CinemaMainWindowController implements Initializable {
             moviesTableView.getItems().clear();
             moviesTableView.setItems(observableListOfMovies);
         }
+    }
+
+    public void exitFromApp(ActionEvent actionEvent) {
+        HibernateUtil.closeSession();
+        System.exit(0);
     }
 }

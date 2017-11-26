@@ -87,7 +87,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Plik">
             <items>
-              <MenuItem mnemonicParsing="false" text="Wyjdź" />
+              <MenuItem fx:id="exitFromAppButton" mnemonicParsing="false" onAction="#exitFromApp" text="Wyjdź" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edytuj">

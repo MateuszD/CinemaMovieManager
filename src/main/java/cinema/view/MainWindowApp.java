@@ -1,5 +1,6 @@
 package cinema.view;
 
+import cinema.presenter.CinemaProjectPresenter;
 import hibernateUtil.HibernateUtil;
 import javafx.application.Application;
 import javafx.event.EventHandler;
