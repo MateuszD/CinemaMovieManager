@@ -74,20 +74,18 @@ public class CinemaMainWindowController implements Initializable {
                 && productDatePicker.getValue() != null) {
             warningLabel.setText("");
             Movie movieToAdd = new Movie();
-            movieToAdd.setMovieTitle(titleTextField.getText());
-            movieToAdd.setMovieDirector(directorTextField.getText());
-            movieToAdd.setMovieGenre(genreTextField.getText());
-            movieToAdd.setMovieProductionDate(productDatePicker.getValue());
+            setMovieAttributesFromInputFields(movieToAdd);
 
             presenter.addMovieToDatabase(movieToAdd);
-            observableListOfMovies.clear();
+            clearInputFields();
             observableListOfMovies = FXCollections.observableArrayList(presenter.showMovieList());
             moviesTableView.setItems(observableListOfMovies);
         } else {
             warningLabel.setTextFill(Color.RED);
-            warningLabel.setText("Wypełnij puste pola!");
+            warningLabel.setText("Wypełnij puste pola!!");
         }
     }
+
 
     public void deleteMovieFromList(ActionEvent actionEvent) {
         Integer selectedMovieIndex = moviesTableView.selectionModelProperty().getValue().getSelectedItem().getMovieId();
@@ -107,5 +105,21 @@ public class CinemaMainWindowController implements Initializable {
     public void exitFromApp(ActionEvent actionEvent) {
         HibernateUtil.closeSession();
         System.exit(0);
+    }
+
+
+    private void clearInputFields() {
+        titleTextField.clear();
+        directorTextField.clear();
+        genreTextField.clear();
+        productDatePicker.setValue(null);
+        observableListOfMovies.clear();
+    }
+
+    private void setMovieAttributesFromInputFields(Movie movieToAdd) {
+        movieToAdd.setMovieTitle(titleTextField.getText());
+        movieToAdd.setMovieDirector(directorTextField.getText());
+        movieToAdd.setMovieGenre(genreTextField.getText());
+        movieToAdd.setMovieProductionDate(productDatePicker.getValue());
     }
 }
